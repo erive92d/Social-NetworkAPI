@@ -1,0 +1,18 @@
+[
+    {
+        "username":"joshua21",
+        "email":"joshua@gmail.com",
+        "thought":[{ "thoughtText":"This is test"},{"username":"deorren"}]
+    },
+    {
+        "username":"susan",
+        "email":"susan@gmail.com",
+        "thought":[{ "thoughtText":"This is test"},{"username":"deorren"}]
+    },
+    {
+        "username":"deorren",
+        "email":"deorren@gmail.com",
+        "thought":[{ "thoughtText":"This is test"},{"username":"deorren"}]
+    }
+    
+]
