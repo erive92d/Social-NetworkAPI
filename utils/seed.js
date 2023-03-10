@@ -1,27 +1,48 @@
 const connection = require('../config/connection');
-const { User } = require('../models');
-// const getRandomName = require('./data');
-const userData = require('./user.json')
+const { User, Thought } = require('../models');
+const { getRandomName, getRandomEmail, getRandomThought } = require('./data');
 
-// console.log(getRandomName());
+console.log(getRandomName());
 connection.on('error', (err) => err);
 
 connection.once('open', async () => {
   console.log('connected');
   // await Post.deleteMany({});
   await User.deleteMany({});
-
+  await Thought.deleteMany({});
+  let friends = []
   const users = [];
+  const thoughts = []
+  User.find({},'_id')
+    .then((res)=>friends = [res])
 
-  // for (let i = 0; i < 20; i++) {
-  //   const fullName = getRandomName();
-  //   // const first = fullName.split(' ')[0];
-  //   // const last = fullName.split(' ')[1];
 
-    users.push(userData);
-  // }
+  //User
+  for (let i = 0; i < 20; i++) {
+    const username = getRandomName();
+    const email = getRandomEmail()
+     
+    
+    users.push({
+      username,
+      email,
+      friends
+    });
+  }
+
+  //Thought
+  for (let i = 0; i < 20; i++) {
+    const thoughtText = getRandomThought();
+    const username = getRandomName()
+    thoughts.push({
+      thoughtText,
+      username
+      
+    });
+  }
 
   await User.collection.insertMany(users);
+  await Thought.collection.insertMany(thoughts)
   console.log(users);
   process.exit(0);
 });
