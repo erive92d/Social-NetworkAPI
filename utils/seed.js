@@ -10,11 +10,11 @@ connection.once('open', async () => {
   // await Post.deleteMany({});
   await User.deleteMany({});
   await Thought.deleteMany({});
-  let friends = []
+ 
   const users = [];
   const thoughts = []
-  User.find({},'_id')
-    .then((res)=>friends = [res])
+ 
+
 
 
   //User
@@ -26,7 +26,7 @@ connection.once('open', async () => {
     users.push({
       username,
       email,
-      friends
+      
     });
   }
 
@@ -43,6 +43,21 @@ connection.once('open', async () => {
 
   await User.collection.insertMany(users);
   await Thought.collection.insertMany(thoughts)
-  console.log(users);
+
+  const getFriends = async () => {
+    try {
+      const friendData =  await User.find({},'_id')
+      return friendData
+
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const friends = await getFriends()
+  console.log(friends,'LLLLLL')
+
+  await User.update({},{$set:{friends: friends}})
+  console.log(users)
   process.exit(0);
 });

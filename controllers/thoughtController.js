@@ -1,5 +1,5 @@
 const { Thought, User } = require('../models');
-post
+
 module.exports = {
   getThought(req, res) {
     Thought.find()
