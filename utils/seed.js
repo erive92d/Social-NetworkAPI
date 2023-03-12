@@ -12,7 +12,7 @@ connection.once('open', async () => {
   await Thought.deleteMany({});
  
   const users = [];
-  const thoughts = []
+  // const thoughts = []
  
 
 
@@ -31,19 +31,21 @@ connection.once('open', async () => {
   }
 
   //Thought
-  for (let i = 0; i < 20; i++) {
-    const thoughtText = getRandomThought();
-    const username = getRandomName()
-    thoughts.push({
-      thoughtText,
-      username
+  // for (let i = 0; i < 20; i++) {
+  //   const thoughtText = getRandomThought();
+  //   const username = getRandomName()
+  //   thoughts.push({
+  //     thoughtText,
+  //     username
       
-    });
-  }
+  //   });
+  // }
 
   await User.collection.insertMany(users);
-  await Thought.collection.insertMany(thoughts)
+  // await Thought.collection.insertMany(thoughts)
 
+
+  //function for adding friends using existing Users'
   const getFriends = async () => {
     try {
       const friendData =  await User.find({},'_id')
@@ -54,10 +56,15 @@ connection.once('open', async () => {
     }
   }
 
+
+
+
+
+
   const friends = await getFriends()
   console.log(friends,'LLLLLL')
 
-  await User.update({},{$set:{friends: friends}})
+  await User.updateMany({},{$set:{friends: friends}})
   console.log(users)
   process.exit(0);
 });
