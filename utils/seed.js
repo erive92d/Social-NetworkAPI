@@ -10,14 +10,28 @@ connection.once('open', async () => {
   // await Post.deleteMany({});
   await User.deleteMany({});
   await Thought.deleteMany({});
-  let friends = []
+
   const users = [];
   const thoughts = []
-  User.find({},'_id')
-    .then((res)=>friends = [res])
+
+
+  const getRandomFriend = async () => {
+    let arrayFriends = [];
+    const getFriend = await User.find({},'_id')
+    arrayFriends.push(getFriend)
+    return arrayFriends
+
+  }
+
+  let friends = getRandomFriend()
+  
+
+  console.log(friends)
 
 
   //User
+
+  // let friends = await getRandomFriend()
   for (let i = 0; i < 20; i++) {
     const username = getRandomName();
     const email = getRandomEmail()
@@ -26,9 +40,12 @@ connection.once('open', async () => {
     users.push({
       username,
       email,
-      friends
     });
   }
+
+ users.map((items)=> 
+  items['friends'] = friends
+ )
 
   //Thought
   for (let i = 0; i < 20; i++) {
@@ -41,8 +58,10 @@ connection.once('open', async () => {
     });
   }
 
+
   await User.collection.insertMany(users);
   await Thought.collection.insertMany(thoughts)
+  
   console.log(users);
   process.exit(0);
 });

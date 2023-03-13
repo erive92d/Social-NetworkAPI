@@ -7,11 +7,6 @@ const {
   deleteUser,
 } = require('../../controllers/userController');
 
-const User = require('../../models/User')
-
-const userId = User.find({},{_id:1})
-
-console.log(userId,'99999999999999999')
 
 
 
