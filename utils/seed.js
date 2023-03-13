@@ -10,29 +10,15 @@ connection.once('open', async () => {
   // await Post.deleteMany({});
   await User.deleteMany({});
   await Thought.deleteMany({});
-
+ 
   const users = [];
-  const thoughts = []
+  // const thoughts = []
+ 
 
-
-  const getRandomFriend = async () => {
-    let arrayFriends = [];
-    const getFriend = await User.find({},'_id')
-    arrayFriends.push(getFriend)
-    return arrayFriends
-
-  }
-
-  let friends = getRandomFriend()
-  
-
-  console.log(friends)
 
 
   //User
-
-  // let friends = await getRandomFriend()
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i <5 ; i++) {
     const username = getRandomName();
     const email = getRandomEmail()
      
@@ -40,6 +26,7 @@ connection.once('open', async () => {
     users.push({
       username,
       email,
+      
     });
   }
 
@@ -48,20 +35,40 @@ connection.once('open', async () => {
  )
 
   //Thought
-  for (let i = 0; i < 20; i++) {
-    const thoughtText = getRandomThought();
-    const username = getRandomName()
-    thoughts.push({
-      thoughtText,
-      username
+  // for (let i = 0; i < 20; i++) {
+  //   const thoughtText = getRandomThought();
+  //   const username = getRandomName()
+  //   thoughts.push({
+  //     thoughtText,
+  //     username
       
-    });
+  //   });
+  // }
+
+  await User.collection.insertMany(users);
+  // await Thought.collection.insertMany(thoughts)
+
+
+  //function for adding friends using existing Users'
+  const getFriends = async () => {
+    try {
+      const friendData =  await User.find({},{_id:1,email:1,username:1})
+      return friendData
+
+    } catch (err) {
+      console.log(err)
+    }
   }
 
 
-  await User.collection.insertMany(users);
-  await Thought.collection.insertMany(thoughts)
-  
-  console.log(users);
+
+
+
+
+  const friends = await getFriends()
+  console.log(friends,'LLLLLL')
+
+  await User.updateMany({},{$set:{friends: friends}})
+  console.log(users)
   process.exit(0);
 });
