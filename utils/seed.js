@@ -18,7 +18,7 @@ connection.once('open', async () => {
 
 
   //User
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i <5 ; i++) {
     const username = getRandomName();
     const email = getRandomEmail()
      
@@ -48,7 +48,7 @@ connection.once('open', async () => {
   //function for adding friends using existing Users'
   const getFriends = async () => {
     try {
-      const friendData =  await User.find({},'_id')
+      const friendData =  await User.find({},{_id:1,email:1,username:1})
       return friendData
 
     } catch (err) {
