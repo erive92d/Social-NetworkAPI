@@ -12,7 +12,7 @@ connection.once('open', async () => {
   await Thought.deleteMany({});
  
   const users = [];
-  // const thoughts = []
+  const thoughts = []
  
 
 
@@ -30,24 +30,38 @@ connection.once('open', async () => {
     });
   }
 
- users.map((items)=> 
-  items['friends'] = friends
- )
+//  users.map((items)=> 
+//   items['friends'] = friends
+//  )
 
-  //Thought
-  // for (let i = 0; i < 20; i++) {
-  //   const thoughtText = getRandomThought();
-  //   const username = getRandomName()
-  //   thoughts.push({
-  //     thoughtText,
-  //     username
+
+  for (let i = 0; i < 20; i++) {
+    const thoughtText = getRandomThought();
+    const username = getRandomName()
+    thoughts.push({
+      thoughtText,
+      username
       
-  //   });
-  // }
+    });
+  }
+
 
   await User.collection.insertMany(users);
-  // await Thought.collection.insertMany(thoughts)
+  await Thought.collection.insertMany(thoughts)
 
+
+  const getThought = async() => {
+    const randomNum = Math.floor(Math.random()* 10)
+    const thoughtData = await Thought.find({},"_id")
+
+    return thoughtData[randomNum]
+
+  }
+
+  const thoughtData = await getThought()
+
+
+await User.updateMany({},{$push:{thoughts:thoughtData}})
 
   //function for adding friends using existing Users'
   const getFriends = async () => {
