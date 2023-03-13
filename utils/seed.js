@@ -83,6 +83,32 @@ await User.updateMany({},{$push:{thoughts:thoughtData}})
   console.log(friends,'LLLLLL')
 
   await User.updateMany({},{$set:{friends: friends}})
+
+
+
+  const getReaction = async () => {
+    const thoughtData = await Thought.update({},{$push:{reactions: 
+    {
+      reactionBody: "This is reaction test",
+      username: "Joshua Daniel"
+    }
+    
+    }})
+    return thoughtData
+  }
+
+  await getReaction()
+
+
+
+
+
+
+
+
+
+
+
   console.log(users)
   process.exit(0);
 });
