@@ -89,8 +89,8 @@ await User.updateMany({},{$push:{thoughts:thoughtData}})
   const getReaction = async () => {
     const thoughtData = await Thought.update({},{$push:{reactions: 
     {
-      reactionBody: "This is reaction test",
-      username: "Joshua Daniel"
+      reactionBody: getRandomThought(),
+      username: getRandomName()
     }
     
     }})
