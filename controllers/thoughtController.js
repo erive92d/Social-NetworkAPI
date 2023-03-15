@@ -37,4 +37,17 @@ module.exports = {
         res.status(500).json(err);
       });
   },
+  updateThought(req,res) {
+    Thought.findByIdAndUpdate({_id:req.params.thoughtId},{$set:{
+      ...req.body
+    }})
+    .then((resp)=> res.json(resp))
+    .catch((err)=> console.log(err))
+    
+  },
+  deleteThought(req,res) {
+    Thought.findByIdAndDelete({_id: req.params.thoughtId})
+    .then((resp)=>res.json(resp))
+    .catch((err)=> console.log(err))
+  }
 };
