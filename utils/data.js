@@ -931,10 +931,8 @@ const thought = [
 ];
 
 
-const getThoughtPart= () => thought[Math.floor(Math.random() * thought.length)]
-const getRandomThought = () => `${getThoughtPart()}`
+const getRandomThought = () => `${thought[Math.floor(Math.random() * thought.length)]}`
 
-// const users = [];
 const getNamePart = () => names[Math.floor(Math.random() * names.length)];
 const getRandomName = () => `${getNamePart()} ${getNamePart()}`;
 

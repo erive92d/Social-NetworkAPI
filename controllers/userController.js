@@ -32,7 +32,7 @@ module.exports = {
   },
 
   deleteUser(req, res) {
-    User.delete({ _id: req.params.userId })
+    User.remove({ _id: req.params.userId })
       .then((deleteUser) => res.json(deleteUser))
       .catch((err) => res.status(500).json(err));
   },
@@ -43,7 +43,7 @@ module.exports = {
       },
       {
         $push: {
-          friends: req.params.friendsId,
+          friends: req.params.friendId
         }
       }
     )
@@ -51,7 +51,7 @@ module.exports = {
       .catch((err) => res.status(500).json(err))
   },
   deleteFriend(req, res) {
-    User.update({ _id: req.params.userId }, { $pull: { friends: req.params.friendsId  } })
+    User.update({ _id: req.params.userId }, { $pull: { friends: req.params.friendId  } })
       .then((del) => res.json(del))
       .catch((err) => res.status(500).json(err))
   }

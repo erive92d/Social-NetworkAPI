@@ -50,4 +50,15 @@ module.exports = {
     .then((resp)=>res.json(resp))
     .catch((err)=> console.log(err))
   }
+,
+  postReaction(req,res) {                      //POSTING REACTIONS
+    Thought.findByIdAndUpdate({_id:req.params.thoughtId}, {$push:{reactions: req.body}})
+    .then((resp) => res.json(resp))
+    .catch((err) => console.log(err))
+  },
+  deleteReaction(req,res) {
+    Thought.findByIdAndUpdate({_id:req.params.thoughtId},{$pull:{reactions: {_id: req.body.reactionId}}})
+    .then((resp)=> res.json(resp))
+    .catch((err)=> console.log(err))
+  }
 };
