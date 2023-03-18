@@ -33,6 +33,8 @@ MongoDB and express
 
 ## Usage
 ![SOCIAL](https://user-images.githubusercontent.com/110507887/226083555-c4d27a84-75ae-42d7-a475-b17fad84a365.png)
+![SOCIAL THOUGHT](https://user-images.githubusercontent.com/110507887/226083634-ae176b93-4b1a-4535-99cc-711860f03ce7.png)
+
 
 
 ## Credits
